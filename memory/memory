@@ -47,6 +47,7 @@ END {
 		total=mem_total/1024/1024
 	}
 
+if (used > 0) {
 	pct=0
 	if (total > 0) {
 		pct=used/total*100
@@ -69,5 +70,6 @@ END {
 	} else if (pct > 70) {
 		print("#FFF600")
 	}
+}
 }
 ' /proc/meminfo

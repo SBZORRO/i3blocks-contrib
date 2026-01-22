@@ -51,7 +51,7 @@ signal=1
 #SCONTROL=[determined automatically]
 ##exposed format variables: ${SYMB}, ${VOL}, ${INDEX}, ${NAME}
 LONG_FORMAT="${SYMB} ${VOL}%"
-SHORT_FORMAT="${SYMB} ${VOL}%"
+SHORT_FORMAT="${SYMB}"
 AUDIO_HIGH_SYMBOL=
 AUDIO_MED_THRESH=50
 AUDIO_MED_SYMBOL=
@@ -72,14 +72,14 @@ AUDIO_DELTA=5
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
 [temperature]
-interval=10
+interval=3
 T_WARN=70
 T_CRIT=90
 
 [usb]
 markup=pango
 signal=1
-interval=10
+interval=3
 IGNORE_LIST=["nvme0n1p1", "nvme0n1p2", "nvme0n1p3"]
 #IGNORE_LIST=["sdd1", "mapper/sda1_crypt"]
 #INFO_TEXT_COLOR=white
@@ -113,7 +113,7 @@ separator=false
 label= 
 
 [bandwidth]
-interval=5
+interval=3
 INLABEL=󰱦 
 OUTLABEL=󰳘 
 
@@ -123,11 +123,11 @@ OUTLABEL=󰳘
 [memory]
 label= 
 separator=false
-interval=30
+interval=3
 
 [memory]
 instance=swap
-interval=30
+interval=3
 
 # Disk usage
 #
@@ -163,7 +163,7 @@ SEPARATOR=
 # see the script for details.
 [cpu_usage]
 label= 
-interval=10
+interval=3
 #min_width=CPU 100.00%
 separator=false
 COLOR_NORMAL=#FFFFFF
@@ -174,7 +174,7 @@ T_CRIT=80
 DECIMALS=2
 
 [load_average]
-interval=10
+interval=3
 
 # Date Time
 #

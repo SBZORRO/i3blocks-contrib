@@ -152,6 +152,8 @@ sed 's/.*= "\(.*\)".*/\1/')
     else
         SYMB=$AUDIO_MUTED_SYMBOL
         COLOR=$MUTED_COLOR
+        print_format "$SHORT_FORMAT"
+        return;
     fi
 
     if [[ $ACTIVE = "" ]] ; then
