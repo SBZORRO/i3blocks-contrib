@@ -40,7 +40,21 @@ fi
 
 #------------------------------------------------------------------------
 
-QUALITY=$(iw dev ${INTERFACE} link | grep 'dBm$' | grep -Eoe '-[0-9]{2}' | awk '{print  ($1 > -50 ? 100 :($1 < -100 ? 0 : ($1+100)*2))}')
+QUALITY=$(iw dev ${INTERFACE} link | awk -F': *' '
+/SSID/   {ssid=$2}
+/signal/ {
+dbm = $2 + 0
+sig=(dbm > -50 ? 100 :(dbm < -100 ? 0 : (dbm + 100) * 2))
+ if      (sig >= 80)  prefix="󰤨 "   # excellent
+  else if (sig >= 60)  prefix="󰤥 "   # good
+  else if (sig >= 40)  prefix="󰤢 "   # ok
+  else if (sig >= 20)  prefix="󰤟 "   # weak
+  else                 prefix="󰤯 "   # very weak / down
+}
+END {printf "%s %s %d\n", ssid, prefix, sig}
+')
+
+# $(iw dev ${INTERFACE} link | grep 'dBm$' | grep -Eoe '-[0-9]{2}' | awk '{print  ($1 > -50 ? 100 :($1 < -100 ? 0 : ($1+100)*2))}')
 
 #------------------------------------------------------------------------
 
@@ -48,12 +62,12 @@ echo $QUALITY% # full text
 echo $QUALITY% # short text
 
 # color
-if [[ $QUALITY -ge 80 ]]; then
-    echo $COLOR_GE80
-elif [[ $QUALITY -ge 60 ]]; then
-    echo $COLOR_GE60
-elif [[ $QUALITY -ge 40 ]]; then
-    echo $COLOR_GE40
-else
-    echo $COLOR_LOWR
-fi
+# if [[ $QUALITY -ge 80 ]]; then
+#     echo $COLOR_GE80
+# elif [[ $QUALITY -ge 60 ]]; then
+#     echo $COLOR_GE60
+# elif [[ $QUALITY -ge 40 ]]; then
+#     echo $COLOR_GE40
+# else
+#     echo $COLOR_LOWR
+# fi

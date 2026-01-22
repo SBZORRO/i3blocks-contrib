@@ -55,8 +55,19 @@ close(SENSORS);
 
 $temperature eq -9999 and die 'Cannot find temperature';
 
+if ($temperature >= 30) {
+      print "$temperature°C\n" x2;
+} elsif ($temperature >= 40) {
+      print "$temperature°C\n" x2;
+} elsif ($temperature >= 50) {
+      print "$temperature°C\n" x2;
+} elsif ($temperature >= 60) {
+      print "$temperature°C\n" x2;
+} elsif ($temperature >= 70) {
+      print "$temperature°C\n" x2;
+}
 # Print short_text, full_text
-print "$temperature°C\n" x2;
+# print "$temperature°C\n" x2;
 
 # Print color, if needed
 if ($temperature >= $t_crit) {
