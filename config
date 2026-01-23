@@ -29,6 +29,10 @@ command=$SCRIPT_DIR/$BLOCK_NAME/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
+[i3-focusedwindow]
+label= 
+interval=persist
+
 # Battery indicator
 #
 # The battery instance defaults to 0.
@@ -142,7 +146,7 @@ interval=3
 [disk-io]
 interval=persist
 markup=pango
-#instance=/^sda/
+instance=nvme
 #DT=5
 #MB_ONLY=0 #0 or 1
 #KB_ONLY=0 #0 or 1
@@ -150,7 +154,7 @@ markup=pango
 #MB_PRECISION=1
 #KB_PRECISION=0
 #REGEX=/^(s|h)d[a-zA-Z]+/
-#THRESHOLD=0
+THRESHOLD=0
 #WARN_COLOR="#FF0000"
 label= 
 SEPARATOR= 
