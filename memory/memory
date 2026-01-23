@@ -70,6 +70,8 @@ if (used > 0) {
 	} else if (pct > 70) {
 		print("#FFF600")
 	}
+} else {
+	printf("(%.f%%)\n", 0)
 }
 }
 ' /proc/meminfo

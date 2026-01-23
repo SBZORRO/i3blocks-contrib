@@ -33,13 +33,100 @@ markup=none
 label= 
 interval=persist
 
-# Battery indicator
-#
-# The battery instance defaults to 0.
-[batterybar]
+[usb]
 markup=pango
+signal=1
 interval=3
-BAT_NUMBER=0
+IGNORE_LIST=["nvme0n1p1", "nvme0n1p2", "nvme0n1p3"]
+#IGNORE_LIST=["sdd1", "mapper/sda1_crypt"]
+#INFO_TEXT_COLOR=white
+#MOUNTED_COLOR=green
+#PLUGGED_COLOR=gray
+#LOCKED_COLOR=gray
+#UNLOCKED_NOT_MOUNTED_COLOR=yellow
+#PARTITIONLESS_COLOR=red
+#PARTITIONLESS_TEXT=no partitions
+#SEPARATOR=<span color='gray'> | </span>
+#LOCKED_INDICATOR=
+#UNLOCKED_INDICATOR=
+#READONLY_INDICATOR=ro
+#TRUNCATE_FS_LABELS=[not set by default, accepts +/- integers]
+
+
+# Network interface monitoring
+#
+# If the instance is not specified, use the interface used for default route.
+# The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
+# [iface]
+# #IFACE=wlan0
+# color=#00FF00
+# interval=10
+# separator=false
+# display_wifi_name=1
+
+[bandwidth]
+interval=3
+INLABEL=󰱦 
+OUTLABEL=󰳘 
+
+# Disk usage
+#
+# The directory defaults to $HOME if the instance is not specified.
+# The script may be called with a optional argument to set the alert
+# (defaults to 10 for 10%).
+# [disk]
+# label=HOME
+# #DIR=/mnt/data
+# interval=30
+
+[disk-io]
+interval=persist
+markup=pango
+instance=nvme
+#DT=5
+#MB_ONLY=0 #0 or 1
+#KB_ONLY=0 #0 or 1
+#WIDTH=3
+#MB_PRECISION=1
+#KB_PRECISION=0
+#REGEX=/^(s|h)d[a-zA-Z]+/
+THRESHOLD=0
+#WARN_COLOR="#FF0000"
+label= 
+SEPARATOR= 
+#PREFIX=
+#SUFFIX="B/s"
+
+# Memory usage
+#
+# The type defaults to "mem" if the instance is not specified.
+[memory]
+label= 
+separator=false
+interval=3
+
+[memory]
+instance=swap
+interval=3
+
+# CPU usage
+#
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+[cpu_usage]
+label= 
+interval=3
+#min_width=CPU 100.00%
+separator=false
+COLOR_NORMAL=#FFFFFF
+COLOR_WARN=#FFFC00
+COLOR_CRIT=#FF0000
+T_WARN=50
+T_CRIT=80
+DECIMALS=2
+
+[load_average]
+interval=3
 
 # Volume indicator
 #
@@ -48,6 +135,7 @@ BAT_NUMBER=0
 # See the script for details.
 [volume-pipewire]
 interval=persist
+separator=false
 SUBSCRIBE=1
 USE_ALSA_NAME=1
 signal=1
@@ -80,111 +168,25 @@ interval=3
 T_WARN=70
 T_CRIT=90
 
-[usb]
-markup=pango
-signal=1
-interval=3
-IGNORE_LIST=["nvme0n1p1", "nvme0n1p2", "nvme0n1p3"]
-#IGNORE_LIST=["sdd1", "mapper/sda1_crypt"]
-#INFO_TEXT_COLOR=white
-#MOUNTED_COLOR=green
-#PLUGGED_COLOR=gray
-#LOCKED_COLOR=gray
-#UNLOCKED_NOT_MOUNTED_COLOR=yellow
-#PARTITIONLESS_COLOR=red
-#PARTITIONLESS_TEXT=no partitions
-#SEPARATOR=<span color='gray'> | </span>
-#LOCKED_INDICATOR=
-#UNLOCKED_INDICATOR=
-#READONLY_INDICATOR=ro
-#TRUNCATE_FS_LABELS=[not set by default, accepts +/- integers]
-
-
-# Network interface monitoring
-#
-# If the instance is not specified, use the interface used for default route.
-# The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
-# [iface]
-# #IFACE=wlan0
-# color=#00FF00
-# interval=10
-# separator=false
-# display_wifi_name=1
-
 [wifi]
 interval=1
-separator=false
 label= 
-
-[bandwidth]
-interval=3
-INLABEL=󰱦 
-OUTLABEL=󰳘 
-
-# Memory usage
-#
-# The type defaults to "mem" if the instance is not specified.
-[memory]
-label= 
-separator=false
-interval=3
-
-[memory]
-instance=swap
-interval=3
-
-# Disk usage
-#
-# The directory defaults to $HOME if the instance is not specified.
-# The script may be called with a optional argument to set the alert
-# (defaults to 10 for 10%).
-# [disk]
-# label=HOME
-# #DIR=/mnt/data
-# interval=30
-
-[disk-io]
-interval=persist
-markup=pango
-instance=nvme
-#DT=5
-#MB_ONLY=0 #0 or 1
-#KB_ONLY=0 #0 or 1
-#WIDTH=3
-#MB_PRECISION=1
-#KB_PRECISION=0
-#REGEX=/^(s|h)d[a-zA-Z]+/
-THRESHOLD=0
-#WARN_COLOR="#FF0000"
-label= 
-SEPARATOR= 
-#PREFIX=
-#SUFFIX="B/s"
-
-# CPU usage
-#
-# The script may be called with -w and -c switches to specify thresholds,
-# see the script for details.
-[cpu_usage]
-label= 
-interval=3
-#min_width=CPU 100.00%
-separator=false
-COLOR_NORMAL=#FFFFFF
-COLOR_WARN=#FFFC00
-COLOR_CRIT=#FF0000
-T_WARN=50
-T_CRIT=80
-DECIMALS=2
-
-[load_average]
-interval=3
 
 # Date Time
 #
 [time]
 command=date
 interval=1
+separator=false
+
+# Battery indicator
+#
+# The battery instance defaults to 0.
+[batterybar]
+markup=pango
+interval=3
+BAT_NUMBER=0
+separator=false
 
 # Generic media player support
 #
