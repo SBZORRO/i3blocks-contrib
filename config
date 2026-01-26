@@ -33,6 +33,35 @@ markup=none
 label= 
 interval=persist
 
+# Volume indicator
+#
+# The first parameter sets the step (and units to display)
+# The second parameter overrides the mixer selection
+# See the script for details.
+[volume-pipewire]
+interval=persist
+SUBSCRIBE=1
+USE_ALSA_NAME=1
+signal=1
+#MIXER=[determined automatically]
+#SCONTROL=[determined automatically]
+##exposed format variables: ${SYMB}, ${VOL}, ${INDEX}, ${NAME}
+LONG_FORMAT="${SYMB} ${VOL}%"
+SHORT_FORMAT="${SYMB}"
+AUDIO_HIGH_SYMBOL=
+AUDIO_MED_THRESH=50
+AUDIO_MED_SYMBOL=
+AUDIO_LOW_THRESH=20
+AUDIO_LOW_SYMBOL=
+AUDIO_MUTED_SYMBOL=
+AUDIO_DELTA=5
+#DEFAULT_COLOR="#ffffff"
+#MUTED_COLOR="#a0a0a0"
+#USE_ALSA_NAME=0
+#USE_DESCRIPTION=0
+## SUBSCRIBE=1 requires interval=persist and always uses LONG_FORMAT
+#SUBSCRIBE=0
+
 [usb]
 markup=pango
 signal=1
@@ -65,9 +94,10 @@ IGNORE_LIST=["nvme0n1p1", "nvme0n1p2", "nvme0n1p3"]
 # display_wifi_name=1
 
 [bandwidth]
-interval=3
+interval=5
 INLABEL=󰱦 
 OUTLABEL=󰳘 
+label=󰲝 
 
 # Disk usage
 #
@@ -80,8 +110,7 @@ OUTLABEL=󰳘
 # interval=30
 
 [disk-io]
-interval=persist
-markup=pango
+interval=5
 instance=nvme
 #DT=5
 #MB_ONLY=0 #0 or 1
@@ -90,10 +119,10 @@ instance=nvme
 #MB_PRECISION=1
 #KB_PRECISION=0
 #REGEX=/^(s|h)d[a-zA-Z]+/
-THRESHOLD=0
+#THRESHOLD=0
 #WARN_COLOR="#FF0000"
-label= 
-SEPARATOR= 
+label=󰋊 
+SEPARATOR=󰓢 
 #PREFIX=
 #SUFFIX="B/s"
 
@@ -127,36 +156,6 @@ DECIMALS=2
 
 [load_average]
 interval=3
-
-# Volume indicator
-#
-# The first parameter sets the step (and units to display)
-# The second parameter overrides the mixer selection
-# See the script for details.
-[volume-pipewire]
-interval=persist
-separator=false
-SUBSCRIBE=1
-USE_ALSA_NAME=1
-signal=1
-#MIXER=[determined automatically]
-#SCONTROL=[determined automatically]
-##exposed format variables: ${SYMB}, ${VOL}, ${INDEX}, ${NAME}
-LONG_FORMAT="${SYMB} ${VOL}%"
-SHORT_FORMAT="${SYMB}"
-AUDIO_HIGH_SYMBOL=
-AUDIO_MED_THRESH=50
-AUDIO_MED_SYMBOL=
-AUDIO_LOW_THRESH=20
-AUDIO_LOW_SYMBOL=
-AUDIO_MUTED_SYMBOL=
-AUDIO_DELTA=5
-#DEFAULT_COLOR="#ffffff"
-#MUTED_COLOR="#a0a0a0"
-#USE_ALSA_NAME=0
-#USE_DESCRIPTION=0
-## SUBSCRIBE=1 requires interval=persist and always uses LONG_FORMAT
-#SUBSCRIBE=0
 
 # Temperature
 #

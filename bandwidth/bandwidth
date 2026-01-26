@@ -16,6 +16,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+if [[ -z "$BLOCK_BUTTON" ]]; then
+    echo ""
+    exit
+fi
+
 # Get custom IN and OUT labels if provided by command line arguments
 while [[ $# -gt 1 ]]; do
     key="$1"
