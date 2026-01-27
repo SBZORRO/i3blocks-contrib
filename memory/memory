@@ -72,6 +72,7 @@ if (used > 0) {
 	}
 } else {
 	printf("(%.f%%)\n", 0)
+	printf("%.f%%\n", 0)
 }
 }
 ' /proc/meminfo

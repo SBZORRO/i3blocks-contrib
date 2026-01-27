@@ -35,8 +35,10 @@ while [[ $# -gt 1 ]]; do
     shift
 done
 
-[[ -z "$INLABEL" ]] && INLABEL="IN "
-[[ -z "$OUTLABEL" ]] && OUTLABEL="OUT "
+if [[ -n "SEPARATOR" ]]; then
+     INLABEL=""
+     OUTLABEL=""
+fi
 
 # Use the provided interface, otherwise the device used for the default route.
 if [[ -z $INTERFACE ]] && [[ -n $BLOCK_INSTANCE ]]; then
@@ -105,12 +107,15 @@ if hash bc 2>/dev/null && [[ "$rx_rate" -gt 1048576 ]]; then
 else
     if [[ "$rx_kib" -gt 0 ]]; then
         echo -n "${rx_kib}K"
+    else
+        echo -n "0K"
     fi
 fi
 
 echo -n " "
 
 # outgoing
+echo -n "$SEPARATOR"
 echo -n "$OUTLABEL"
 tx_kib=$(( $tx_rate >> 10 ))
 if hash bc 2>/dev/null && [[ "$tx_rate" -gt 1048576 ]]; then
@@ -118,6 +123,8 @@ if hash bc 2>/dev/null && [[ "$tx_rate" -gt 1048576 ]]; then
 else
     if [[ "$tx_kib" -gt 0 ]]; then
         echo -n "${tx_kib}K"
+    else
+        echo -n "0K"
     fi
 fi
 echo ""

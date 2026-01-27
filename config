@@ -98,6 +98,7 @@ interval=5
 INLABEL=󰱦 
 OUTLABEL=󰳘 
 label=󰲝 
+SEPARATOR=󰓢 
 
 # Disk usage
 #
@@ -156,6 +157,8 @@ DECIMALS=2
 
 [load_average]
 interval=3
+label=󱅝 
+separator=false
 
 # Temperature
 #
@@ -174,7 +177,7 @@ label=
 # Date Time
 #
 [time]
-command=date
+command=date '+%a, %d %b %R:%S'
 interval=1
 separator=false
 
