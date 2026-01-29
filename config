@@ -133,11 +133,11 @@ SEPARATOR=󰓢
 [memory]
 label= 
 separator=false
-interval=3
+interval=5
 
 [memory]
 instance=swap
-interval=3
+interval=5
 
 # CPU usage
 #
@@ -145,7 +145,7 @@ interval=3
 # see the script for details.
 [cpu_usage]
 label= 
-interval=3
+interval=5
 #min_width=CPU 100.00%
 separator=false
 COLOR_NORMAL=#FFFFFF
@@ -156,7 +156,7 @@ T_CRIT=80
 DECIMALS=2
 
 [load_average]
-interval=3
+interval=5
 label=󱅝 
 separator=false
 
@@ -166,12 +166,12 @@ separator=false
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
 [temperature]
-interval=3
+interval=5
 T_WARN=70
 T_CRIT=90
 
 [wifi]
-interval=1
+interval=5
 label= 
 
 # Date Time
@@ -186,7 +186,7 @@ separator=false
 # The battery instance defaults to 0.
 [batterybar]
 markup=pango
-interval=3
+interval=10
 BAT_NUMBER=0
 separator=false
 
