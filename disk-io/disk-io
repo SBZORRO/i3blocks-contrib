@@ -27,7 +27,7 @@ align="${ALIGN--}"
 
 function list_devices {
     echo "Devices iostat reports that match our regex:"
-    iostat | awk '$1~/^(s|h)d[a-zA-Z]+/{print $1}'
+    iostat | awk '$1~/^(s|h)d[a-zA-Z]+|^nvme.+$/{print $1}'
 }
 
 while getopts L:t:w:p:P:R:s:ST:C:lLMmKkh opt; do
@@ -50,9 +50,9 @@ while getopts L:t:w:p:P:R:s:ST:C:lLMmKkh opt; do
 Options:
 -L\tLabel to put in front of the text. Default: $label
 -t\tTime interval in seconds between measurements. Default: $dt
--w\tThe width of printed floats. Default: $width 
--p\tThe precision of kB/s floats. Default: $kB_precision 
--P\tThe precision of MB/s floats. Default: $MB_precision
+-w\tThe width of printed floats. Default: $width
+-p\tThe precision of kB/s floats. Default: $kB_precision
+-P\tThe precision of MB/s floats. Default: $MB_precisio
 -R\tRegex that devices must match. Default: $regex
 -s\tSeparator to put between rates. Default: $sep
 -S\tShort units, omit B/s in kB/s and MB/s.
@@ -66,33 +66,25 @@ Options:
     esac
 done
 
-iostat -dyz | awk -v sep="$sep" "
-    BEGIN {
-        rx = wx = 0;
+iostat -dyz | awk -v sep="$sep" '
+BEGIN {
+    rx = wx = 0;
+}
+$1 ~ /^Device:?/ {
+    rx = wx = 0;
+    next;
+}
+$1 ~ regex {
+    rx += $3;
+    wx += $4;
+}
+END {
+    printf "%s", label;
+    if (!kB_only && (MB_only || rx >= 1024 || wx >= 1024)) {
+        printf "%" align width "." MB_precision "fM %s%" width "." MB_precision "fM %s\n",
+               rx/1024, sep, wx/1024, unit_suffix;
+    } else {
+        printf "%" align width "." kB_precision "fK %s%" width "." kB_precision "f %s\n",
+               rx, sep, wx, unit_suffix;
     }
-    {
-        if(\$0 == \"\") {
-            if ($threshold > 0 && (rx >= $threshold || wx >= $threshold)) {
-                printf \"<span color='$warn_color'>\";
-            }
-            printf \"$label\";
-            if(!$kB_only && ($MB_only || rx >= 1024 || wx >= 1024)) {
-                printf \"%$align$width.${MB_precision}f%s%$width.${MB_precision}f M$unit_suffix\", rx/1024, sep, wx/1024;
-            }
-            else {
-                printf \"%$align$width.${kB_precision}f%s%$width.${kB_precision}f k$unit_suffix\", rx, sep, wx;
-            }
-            if ($threshold > 0 && (rx >= $threshold || wx >= $threshold)) {
-                printf \"</span>\";
-            }
-            printf \"\n\";
-            fflush(stdout);
-        }
-        else if(\$1~/^Device:?/) {
-            rx = wx = 0;
-        }
-        else if(\$1~$regex) {
-            rx += \$3;
-            wx += \$4;
-        }
-    }"
+}'
