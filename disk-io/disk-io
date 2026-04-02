@@ -84,7 +84,7 @@ END {
         printf "%" align width "." MB_precision "fM %s%" width "." MB_precision "fM %s\n",
                rx/1024, sep, wx/1024, unit_suffix;
     } else {
-        printf "%" align width "." kB_precision "fK %s%" width "." kB_precision "f %s\n",
+        printf "%" align width "." kB_precision "fK %s%" width "." kB_precision "fK %s\n",
                rx, sep, wx, unit_suffix;
     }
 }'
