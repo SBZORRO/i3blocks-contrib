@@ -17,7 +17,7 @@ case "$BLOCK_BUTTON" in
 esac
 
 if xset q | grep -q "timeout:  0"; then
-    echo "$actlabel"
-else
     echo "$deactlabel"
+else
+    echo "$actlabel"
 fi
