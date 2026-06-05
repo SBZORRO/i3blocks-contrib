@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+TIMEOUT=600
+
+case "$BLOCK_BUTTON" in
+    1)
+        if xset q | grep -q "timeout:  0"; then
+            xset s 600 600
+            xset dpms 600 600 600
+            notify-send "Auto lock enabled"
+        else
+            xset s off
+            xset -dpms
+            notify-send "Auto lock disabled"
+        fi
+        ;;
+esac
+
+if xset q | grep -q "timeout:  0"; then
+    echo "$actlabel"
+else
+    echo "$deactlabel"
+fi

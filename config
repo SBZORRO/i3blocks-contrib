@@ -48,12 +48,12 @@ signal=1
 ##exposed format variables: ${SYMB}, ${VOL}, ${INDEX}, ${NAME}
 LONG_FORMAT="${SYMB} ${VOL}%"
 SHORT_FORMAT="${SYMB}"
-AUDIO_HIGH_SYMBOL=
+AUDIO_HIGH_SYMBOL= 
 AUDIO_MED_THRESH=50
-AUDIO_MED_SYMBOL=
+AUDIO_MED_SYMBOL= 
 AUDIO_LOW_THRESH=20
-AUDIO_LOW_SYMBOL=
-AUDIO_MUTED_SYMBOL=
+AUDIO_LOW_SYMBOL= 
+AUDIO_MUTED_SYMBOL= 
 AUDIO_DELTA=5
 #DEFAULT_COLOR="#ffffff"
 #MUTED_COLOR="#a0a0a0"
@@ -121,7 +121,7 @@ instance=nvme
 #KB_PRECISION=0
 #REGEX=/^(s|h)d[a-zA-Z]+/
 #THRESHOLD=0
-#WARN_COLOR="#FF0000"
+WARN_COLOR="#FF0000"
 label=󰋊 
 SEPARATOR=󰓢 
 #PREFIX=
@@ -189,6 +189,12 @@ markup=pango
 interval=10
 BAT_NUMBER=0
 separator=false
+
+[autolock]
+deactlabel=󱙱 
+actlabel=󰌿 
+interval=5
+signal=10
 
 # Generic media player support
 #
